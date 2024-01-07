@@ -17,7 +17,7 @@ const DetailsScreen = ({
   route: {
     params: { id },
   },
-}: RootStackScreenProps<"Details">) => {
+}: RootStackScreenProps<"ProductDetails">) => {
   const { colors } = useTheme();
   const insets = useSafeAreaInsets();
   const [count, setCount] = useState(1);

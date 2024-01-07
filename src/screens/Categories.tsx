@@ -17,7 +17,11 @@ import { BottomSheetModal } from "@gorhom/bottom-sheet";
 import CustomBackdrop from "../components/CustomBackdrop";
 import FilterView from "../components/FilterView";
 import { TabsStackScreenProps } from "../navigators/TabsNavigator";
-
+interface MasonryItem {
+    imageUrl: string;
+    title: string;
+  }
+  
 
 const MESONARY_LIST_DATA = [
     {
@@ -57,7 +61,7 @@ const MESONARY_LIST_DATA = [
     },
 ];
 
-const Categories = ({ navigation }: TabsStackScreenProps<"Home">) => {
+const Categories = ({ navigation }: TabsStackScreenProps<"Categories">) => {
     const { colors } = useTheme();
     const [categoryIndex, setCategoryIndex] = useState(0);
     const bottomSheetModalRef = useRef<BottomSheetModal>(null);
@@ -65,11 +69,17 @@ const Categories = ({ navigation }: TabsStackScreenProps<"Home">) => {
     const openFilterModal = useCallback(() => {
         bottomSheetModalRef.current?.present();
     }, []);
-
-    const handleSeeAllPress = () => {
-        // Navigate to the desired component/screen
-        navigation.navigate('Categories');
-    };
+    const handleCategoryPress = (index: number) => {
+        switch (index) {
+          case 0:
+            navigation.navigate('Electronics');
+            break;
+          // Add cases for other categories as needed
+          default:
+            break;
+        }
+      };
+      
 
     return (
         <ScrollView>
@@ -77,11 +87,15 @@ const Categories = ({ navigation }: TabsStackScreenProps<"Home">) => {
 
                 {/* Mesonary */}
                 <MasonryList
-                    data={MESONARY_LIST_DATA}
-                    numColumns={2}
-                    contentContainerStyle={{ paddingHorizontal: 12 }}
-                    showsVerticalScrollIndicator={false}
-                    renderItem={({ item, i }: any) => (
+                  data={MESONARY_LIST_DATA}
+                  numColumns={2}
+                  contentContainerStyle={{ paddingHorizontal: 12 }}
+                  showsVerticalScrollIndicator={false}
+                  renderItem={({ item, i }: { item: unknown; i: number }) => (
+                    <TouchableOpacity
+                        style={{ padding: 6 }}
+                        onPress={() => handleCategoryPress(i)}
+                    >
                         <View style={{ padding: 6 }}>
                             <View
                                 style={{
@@ -151,9 +165,12 @@ const Categories = ({ navigation }: TabsStackScreenProps<"Home">) => {
                                 </View>
                             </View>
                         </View>
+                        </TouchableOpacity>
+
                     )}
                     onEndReachedThreshold={0.1}
                 />
+ 
             </SafeAreaView>
 
             <BottomSheetModal

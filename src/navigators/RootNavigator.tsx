@@ -4,16 +4,18 @@ import {
   NativeStackScreenProps,
   createNativeStackNavigator,
 } from "@react-navigation/native-stack";
-import DetailsScreen from "../screens/DetailsScreen";
+import ProductDetails from "../screens/ProductDetails";
 import TabsNavigator, { TabsStackParamList } from "./TabsNavigator";
 import Categories from "../screens/Categories";
+import { Electronics } from "../screens/Electronics";
 
 export type RootStackParamList = {
   TabsStack: NavigatorScreenParams<TabsStackParamList>;
-  Details: {
+  ProductDetails: {
     id: string;
   };
   Categories: undefined;
+  Electronics:undefined;
 };
 
 const RootStack = createNativeStackNavigator<RootStackParamList>();
@@ -32,15 +34,15 @@ const RootNavigator = () => {
         }}
       />
       <RootStack.Screen
-        name="Details"
-        component={DetailsScreen}
+        name="ProductDetails"
+        component={ProductDetails}
         options={{
           headerShown: false,
         }}
       />
       <RootStack.Screen
-        name="Categories"
-        component={Categories}
+        name="Electronics"
+        component={Electronics}
         options={{
           headerShown: false,
         }}

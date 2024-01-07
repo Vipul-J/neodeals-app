@@ -262,7 +262,7 @@ const HomeScreen = ({ navigation }: TabsStackScreenProps<"Home">) => {
           <View style={{ flexDirection: "row", height: 200, gap: 12 }}>
             <Card
               onPress={() => {
-                navigation.navigate("Details", {
+                navigation.navigate("ProductDetails", {
                   id: "123",
                 });
               }}
@@ -272,7 +272,7 @@ const HomeScreen = ({ navigation }: TabsStackScreenProps<"Home">) => {
             <View style={{ flex: 1, gap: 12 }}>
               <Card
                 onPress={() => {
-                  navigation.navigate("Details", {
+                  navigation.navigate("ProductDetails", {
                     id: "456",
                   });
                 }}
@@ -281,7 +281,7 @@ const HomeScreen = ({ navigation }: TabsStackScreenProps<"Home">) => {
               />
               <Card
                 onPress={() => {
-                  navigation.navigate("Details", {
+                  navigation.navigate("ProductDetails", {
                     id: "789",
                   });
                 }}

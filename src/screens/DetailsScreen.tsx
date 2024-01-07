@@ -265,7 +265,7 @@ const DetailsScreen = ({
               <Text
                 style={{ color: colors.text, fontSize: 18, fontWeight: "600" }}
               >
-                ${(25000).toLocaleString()}
+                Rs {(25000).toLocaleString()}
               </Text>
             </View>
 

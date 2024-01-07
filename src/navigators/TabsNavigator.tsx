@@ -9,6 +9,8 @@ import Icons from "@expo/vector-icons/MaterialIcons";
 import { CompositeScreenProps } from "@react-navigation/native";
 import { RootStackScreenProps } from "./RootNavigator";
 import CustomBottomTabs from "../components/CustomBottomTabs";
+import Profile from "../screens/Profile";
+import Login from "../screens/Login";
 
 export type TabsStackParamList = {
   Home: undefined;
@@ -62,7 +64,7 @@ const TabsNavigator = () => {
       />
       <TabsStack.Screen
         name="Profile"
-        component={Example}
+        component={Login}
         options={{
           tabBarIcon(props) {
             return <Icons name="person" {...props} />;

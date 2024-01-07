@@ -44,19 +44,24 @@ const COLORS = [
 const SLEEVES = [
   {
     id: "sortsleeve",
-    label: "Sort Sleeve",
-    itemCount: 20,
-  },
+    label: "Price High to Low",
+   },
   {
     id: "longsleeve",
-    label: "Long Sleeve",
-    itemCount: 100,
-  },
+    label: "Price Low to High",
+   },
   {
     id: "sleeveless",
-    label: "Sleeve Less",
-    itemCount: 60,
-  },
+    label: "Popularity ",
+   },
+   {
+    id: "sleeveless",
+    label: "Revelance",
+   },
+   {
+    id: "sleeveless",
+    label: "Avg Review",
+   },
 ];
 
 const FilterView = () => {
@@ -111,7 +116,7 @@ const FilterView = () => {
           {/* Sports Category Filter */}
           <View style={{ paddingHorizontal: 24 }}>
             <Text style={{ fontSize: 16, fontWeight: "600", marginBottom: 12 }}>
-              Sports
+              Sort
             </Text>
             <View style={{ flexDirection: "row", flexWrap: "wrap", gap: 12 }}>
               {new Array(7).fill("").map((_, i) => {
@@ -157,17 +162,15 @@ const FilterView = () => {
           {/* Sleeves Filter */}
           <View style={{ paddingHorizontal: 24 }}>
             <Text style={{ fontSize: 16, fontWeight: "600", marginBottom: 12 }}>
-              Sleeves
+              Sort Products
             </Text>
             <View style={{ flexDirection: "row", flexWrap: "wrap", gap: 12 }}>
               {SLEEVES.map((item, i) => {
                 return (
                   <Chip
                     key={i}
-                    itemCount={item.itemCount}
                     label={item.label}
-                    isSelected={i === 0}
-                  />
+                    isSelected={i === 0} itemCount={0}                  />
                 );
               })}
             </View>

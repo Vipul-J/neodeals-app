@@ -20,6 +20,7 @@ export type TabsStackParamList = {
   Payment: undefined;
   Products: undefined;
   Categories: undefined;
+  ProductDetails:undefined;
   Electronics : undefined;
 };
 const TabsStack = createBottomTabNavigator<TabsStackParamList>();

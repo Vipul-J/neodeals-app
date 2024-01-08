@@ -91,7 +91,7 @@ const HomeScreen = ({ navigation }: TabsStackScreenProps<"Home">) => {
   ];
   const handleSeeAllPress = () => {
     // Navigate to the desired component/screen
-    navigation.navigate('Categories');
+    // navigation.navigate('Categories');
   };
 
   return (
@@ -245,7 +245,7 @@ const HomeScreen = ({ navigation }: TabsStackScreenProps<"Home">) => {
           {/* New Collection View */}
         <View style={{ paddingHorizontal: 24 }}>
           {/* Title bar */}
-          <View
+          {/* <View
             style={{
               flexDirection: "row",
               alignItems: "center",
@@ -289,7 +289,7 @@ const HomeScreen = ({ navigation }: TabsStackScreenProps<"Home">) => {
                 imageUrl="https://images.unsplash.com/photo-1485218126466-34e6392ec754?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2342&q=80"
               />
             </View>
-          </View>
+          </View> */}
         </View>
         {/* Mesonary */}
         <MasonryList

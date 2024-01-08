@@ -1,21 +1,20 @@
-// ProductDetails.tsx
-
 import React, { useState, useEffect } from 'react';
-import { View, Text, Image, StyleSheet, Button } from 'react-native';
-interface Product {
-    _id: string;
-    name: string;
-    price: number;
-    desc: string;
-    category: string;
-    subCategory: string;
-    prodImages: string[];
-    // Add other fields as needed
-  }
-  
-const ProductDetails: React.FC<{ route: { params: { id: string } } }> = ({ route }) => {
-  const { id } = route.params;
-  const [product, setProduct] = useState<Product | null>(null);
+import { View, Text, Button } from 'react-native';
+import { RouteProp, useRoute, useNavigation } from '@react-navigation/native';
+
+type ProductDetailsParams = {
+  id: string;
+  customerId: string;
+};
+
+type ProductDetailsRouteProp = RouteProp<{ ProductDetails: ProductDetailsParams }, 'ProductDetails'>;
+
+const ProductDetails: React.FC = () => {
+  const route = useRoute<ProductDetailsRouteProp>();
+  const navigation = useNavigation();
+  const { id, customerId } = route.params;
+
+  const [product, setProduct] = useState<any>(null); // Update 'any' to your specific Product type
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -31,42 +30,43 @@ const ProductDetails: React.FC<{ route: { params: { id: string } } }> = ({ route
     fetchProduct();
   }, [id]);
 
+  const handleAddToCart = async () => {
+    try {
+      const apiUrl = 'http://neodeals.in:4002/api/cart/addProduct';
+      const addToCartResponse = await fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          productId: id,
+          customerId: customerId,
+        }),
+      });
+
+
+      navigation.navigate('Cart'); 
+      console.log(addToCartResponse)
+    } catch (error) {
+      console.error('Error adding product to cart:', error);
+    }
+  };
+
   if (!product) {
-    return <Text>Loading...</Text>; // Add loading state indicator
+    return <Text>Loading...</Text>;
   }
 
   return (
-    <View style={styles.container}>
-      <Image source={{ uri: product.prodImages[0] }} style={styles.image} resizeMode="cover" />
-      <Text style={styles.text}>{product.name}</Text>
-      <Text style={styles.text}>{`Price: $${product.price}`}</Text>
-      <Text style={styles.text}>{`Description: ${product.desc}`}</Text>
-      <Text style={styles.text}>{`Category: ${product.category}`}</Text>
-      <Text style={styles.text}>{`SubCategory: ${product.subCategory}`}</Text>
-      {/* Render other product details */}
-      <Button title="Add to Cart"  />
-
+    <View>
+      {/* Display product details */}
+      <Text>{product.name}</Text>
+      <Text>{`Price: $${product.price}`}</Text>
+      {/* Other product details */}
+      
+      {/* Button to add to cart */}
+      <Button title="Add to Cart" onPress={handleAddToCart} />
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 10,
-    alignItems: 'center',
-    backgroundColor: '#fff',
-  },
-  image: {
-    width: 200,
-    height: 200,
-    borderRadius: 8,
-    marginBottom: 10,
-  },
-  text: {
-    fontSize: 16,
-    marginVertical: 5,
-  },
-});
 
 export default ProductDetails;

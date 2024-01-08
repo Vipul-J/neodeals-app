@@ -10,6 +10,8 @@ interface Product {
   price: number;
   desc: string;
   category: string;
+  productId: string;
+
   // Add other properties as needed
 }
 
@@ -31,30 +33,34 @@ export const Electronics = ({ navigation }: TabsStackScreenProps<"Electronics">)
 
   const handleProductPress = (productId: string) => {
     navigation.navigate('ProductDetails', { id: productId });
-  };
-  
+   };
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      {products.map((product) => (
-                <TouchableOpacity key={product._id} onPress={() => handleProductPress(product._id)}>
-
-        <View key={product._id} style={styles.card}>
-          <Image source={{ uri: product.bannerImage }} style={styles.image} />
-          <Text style={styles.title}>{product.name}</Text>
-          <Text style={styles.price}>${product.price}</Text>
-          <Text style={styles.description}>{product.desc}</Text>
-          <Text style={styles.description}>{product.category}</Text>
-
-        </View>
-        </TouchableOpacity>
-
-      ))}
+    <ScrollView contentContainerStyle={styles.scrollView}>
+      <View style={styles.container}>
+        {products.map((product) => (
+          <TouchableOpacity
+            key={product._id}
+            style={styles.card}
+            onPress={() => handleProductPress(product._id)}
+          >
+            <Image source={{ uri: product.bannerImage }} style={styles.image} />
+            <View style={styles.cardDetails}>
+              <Text style={styles.title}>{product.name}</Text>
+              <Text style={styles.price}>${product.price}</Text>
+            </View>
+          </TouchableOpacity>
+        ))}
+      </View>
+      <View style={styles.bottomC} />
     </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
+  scrollView: {
+    flexGrow: 1,
+  },
   container: {
     flexDirection: 'row',
     flexWrap: 'wrap',
@@ -63,40 +69,42 @@ const styles = StyleSheet.create({
   },
   card: {
     width: '48%',
-    aspectRatio: 1,
-    backgroundColor: '#fff', // White background color for the cards
+    aspectRatio: 1, // Maintain aspect ratio (square)
+    backgroundColor: '#fff',
     borderRadius: 10,
-    marginVertical: 8,
-    alignItems: 'center',
-    justifyContent: 'center',
-    shadowColor: '#000', // Shadow properties for a better visual effect
+    overflow: 'hidden',
+    marginBottom: '4%', // Adjust the spacing between rows
+    shadowColor: '#000',
     shadowOffset: {
       width: 0,
       height: 2,
     },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
-    elevation: 5,
+    elevation: 2,
   },
   image: {
-    width: '80%',
-    height: '80%',
-    resizeMode: 'contain',
-    borderRadius: 10, // Adding border radius to the image
+    width: '100%',
+    height: '70%',
+    resizeMode: 'cover',
+    borderRadius: 2,
+  },
+  cardDetails: {
+    padding: 12,
   },
   title: {
-    fontSize: 16,
+    fontSize: 15,
     fontWeight: 'bold',
     marginTop: 8,
   },
   price: {
     fontSize: 14,
-    marginTop: 4,
-    color: '#777', // Adjust the price text color as needed
+     color: '#777',
+     marginTop:0,
   },
-  description: {
-    fontSize: 12,
-    marginTop: 4,
-    color: '#777', // Adjust the description text color as needed
+  bottomC: {
+    marginBottom: 280, // Adjust the bottom space as needed
   },
 });
+
+

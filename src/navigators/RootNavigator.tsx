@@ -16,6 +16,7 @@ export type RootStackParamList = {
   };
   Categories: undefined;
   Electronics:undefined;
+  
 };
 
 const RootStack = createNativeStackNavigator<RootStackParamList>();

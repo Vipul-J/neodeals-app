@@ -18,6 +18,7 @@ import CustomBackdrop from "../components/CustomBackdrop";
 import FilterView from "../components/FilterView";
 import { TabsStackScreenProps } from "../navigators/TabsNavigator";
 import Carousel from "../components/Carousel";
+import Schemes from "../components/Schemes";
 
 const colors = {
   primary: "#FF5733", // Example color
@@ -90,8 +91,7 @@ const HomeScreen = ({ navigation }: TabsStackScreenProps<"Home">) => {
     require("../assets/images/mob-3.png"), // Example image  
   ];
   const handleSeeAllPress = () => {
-    // Navigate to the desired component/screen
-    // navigation.navigate('Categories');
+    navigation.navigate('Electronics');
   };
 
   return (
@@ -224,7 +224,7 @@ const HomeScreen = ({ navigation }: TabsStackScreenProps<"Home">) => {
               <TouchableOpacity
                 onPress={() => setCategoryIndex(index)}
                 style={{
-                    borderWidth: 1,
+                  borderWidth: 1,
                   borderColor: colors.border,
                 }}
               >
@@ -233,7 +233,7 @@ const HomeScreen = ({ navigation }: TabsStackScreenProps<"Home">) => {
                   style={{
                     width: 120,
                     height: 120,
-                    }}
+                  }}
                   resizeMode="cover" // Adjust this property if needed
                 />
               </TouchableOpacity>
@@ -242,162 +242,8 @@ const HomeScreen = ({ navigation }: TabsStackScreenProps<"Home">) => {
           keyExtractor={(item, index) => index.toString()}
         />
 
-          {/* New Collection View */}
-        <View style={{ paddingHorizontal: 24 }}>
-          {/* Title bar */}
-          {/* <View
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "space-between",
-              marginBottom: 12,
-            }}
-          >
-            <Text
-              style={{ fontSize: 20, fontWeight: "700", color: colors.text }}
-            >
-              New Cloting Collections
-            </Text>
-          </View>
-          <View style={{ flexDirection: "row", height: 200, gap: 12 }}>
-            <Card
-              onPress={() => {
-                navigation.navigate("ProductDetails", {
-                  id: "123",
-                });
-              }}
-              price={130}
-              imageUrl="https://images.unsplash.com/photo-1564584217132-2271feaeb3c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2340&q=80"
-            />
-            <View style={{ flex: 1, gap: 12 }}>
-              <Card
-                onPress={() => {
-                  navigation.navigate("ProductDetails", {
-                    id: "456",
-                  });
-                }}
-                price={120}
-                imageUrl="https://images.unsplash.com/photo-1571945153237-4929e783af4a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=987&q=80"
-              />
-              <Card
-                onPress={() => {
-                  navigation.navigate("ProductDetails", {
-                    id: "789",
-                  });
-                }}
-                price={170}
-                imageUrl="https://images.unsplash.com/photo-1485218126466-34e6392ec754?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2342&q=80"
-              />
-            </View>
-          </View> */}
-        </View>
-        {/* Mesonary */}
-        <MasonryList
-          data={MESONARY_LIST_DATA}
-          numColumns={2}
-          contentContainerStyle={{ paddingHorizontal: 12 }}
-          showsVerticalScrollIndicator={false}
-          renderItem={({ item, i }: any) => (
-            <View style={{ padding: 6 }}>
-              <View
-                style={{
-                  aspectRatio: i === 0 ? 1 : 2 / 3,
-                  position: "relative",
-                  overflow: "hidden",
-                  borderRadius: 24,
-                }}
-              >
-                <Image
-                  source={{
-                    uri: item.imageUrl,
-                  }}
-                  resizeMode="cover"
-                  style={StyleSheet.absoluteFill}
-                />
-                <View
-                  style={[
-                    StyleSheet.absoluteFill,
-                    {
-                      padding: 12,
-                    },
-                  ]}
-                >
-                  <View style={{ flexDirection: "row", gap: 8, padding: 4 }}>
-                    <Text
-                      style={{
-                        flex: 1,
-                        fontSize: 16,
-                        fontWeight: "600",
-                        color: "#fff",
-                        textShadowColor: "rgba(0,0,0,0.2)",
-                        textShadowOffset: {
-                          height: 1,
-                          width: 0,
-                        },
-                        textShadowRadius: 4,
-                      }}
-                    >
-                      {item.title}
-                    </Text>
-                    <View
-                      style={{
-                        backgroundColor: colors.card,
-                        borderRadius: 100,
-                        height: 32,
-                        aspectRatio: 1,
-                        alignItems: "center",
-                        justifyContent: "center",
-                      }}
-                    >
-                      <Icons
-                        name="favorite-border"
-                        size={20}
-                        color={colors.text}
-                      />
-                    </View>
-                  </View>
-                  <View style={{ flex: 1 }} />
-                  <BlurView
-                    style={{
-                      flexDirection: "row",
-                      backgroundColor: "rgba(0,0,0,0.5)",
-                      alignItems: "center",
-                      padding: 6,
-                      borderRadius: 100,
-                      overflow: "hidden",
-                    }}
-                    intensity={20}
-                  >
-                    <Text
-                      style={{
-                        flex: 1,
-                        fontSize: 16,
-                        fontWeight: "600",
-                        color: "#fff",
-                        marginLeft: 8,
-                      }}
-                      numberOfLines={1}
-                    >
-                      Rs {item.price}
-                    </Text>
-                    <TouchableOpacity
-                      style={{
-                        paddingHorizontal: 12,
-                        paddingVertical: 8,
-                        borderRadius: 100,
-                        backgroundColor: "#fff",
-                      }}
-                    >
-                      <Icons name="add-shopping-cart" size={18} color="#000" />
-                    </TouchableOpacity>
-                  </BlurView>
-                </View>
-              </View>
-            </View>
-          )}
-          onEndReachedThreshold={0.1}
-        />
-        
+
+
         {/* Best in Electronics */}
         <View style={{ paddingHorizontal: 24 }}>
           {/* Title bar */}
@@ -411,7 +257,7 @@ const HomeScreen = ({ navigation }: TabsStackScreenProps<"Home">) => {
             <Text
               style={{ fontSize: 20, fontWeight: "700", color: colors.text }}
             >
-             Best in Mobiles
+              Best in Mobiles
             </Text>
             <TouchableOpacity onPress={handleSeeAllPress}>
               <Text style={{ color: colors.primary }}></Text>
@@ -432,7 +278,7 @@ const HomeScreen = ({ navigation }: TabsStackScreenProps<"Home">) => {
               <TouchableOpacity
                 onPress={() => setCategoryIndex(index)}
                 style={{
-                    borderWidth: 1,
+                  borderWidth: 1,
                   borderColor: colors.border,
                 }}
               >
@@ -441,7 +287,7 @@ const HomeScreen = ({ navigation }: TabsStackScreenProps<"Home">) => {
                   style={{
                     width: 200,
                     height: 200,
-                    }}
+                  }}
                   resizeMode="cover" // Adjust this property if needed
                 />
               </TouchableOpacity>
@@ -449,7 +295,11 @@ const HomeScreen = ({ navigation }: TabsStackScreenProps<"Home">) => {
           }}
           keyExtractor={(item, index) => index.toString()}
         />
- <View style={{ paddingHorizontal: 24 }}>
+
+         
+
+        {/* Best in Electronics */}
+        <View style={{ paddingHorizontal: 24 }}>
           {/* Title bar */}
           <View
             style={{
@@ -461,19 +311,74 @@ const HomeScreen = ({ navigation }: TabsStackScreenProps<"Home">) => {
             <Text
               style={{ fontSize: 20, fontWeight: "700", color: colors.text }}
             >
-Upcoming Festive Offers     
-       </Text>
+              Schemes You'd Not Miss
+            </Text>
             <TouchableOpacity onPress={handleSeeAllPress}>
               <Text style={{ color: colors.primary }}></Text>
             </TouchableOpacity>
           </View>
         </View>
+        <FlatList
+          data={Best}
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={{
+            paddingHorizontal: 21,
+            gap: 12,
+          }}
+          renderItem={({ item, index }) => {
+            const isSelected = categoryIndex === index;
+            return (
+              <TouchableOpacity
+                onPress={() => setCategoryIndex(index)}
+                style={{
+                  borderWidth: 1,
+                  borderColor: colors.border,
+                }}
+              >
+                <Image
+                  source={item}
+                  style={{
+                    width: 200,
+                    height: 200,
+                  }}
+                  resizeMode="cover" // Adjust this property if needed
+                />
+              </TouchableOpacity>
+            );
+          }}
+          keyExtractor={(item, index) => index.toString()}
+        />
+
+
+
+        <View style={{ paddingHorizontal: 24 }}>
+          {/* Title bar */}
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "space-between",
+            }}
+          >
+            <Text
+              style={{ fontSize: 20, fontWeight: "700", color: colors.text }}
+            >
+              Upcoming Festive Offers
+            </Text>
+            <TouchableOpacity onPress={handleSeeAllPress}>
+              <Text style={{ color: colors.primary }}></Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+
+
         <Carousel />
 
         {/* Categories Section */}
         {/* <View style={{ paddingHorizontal: 24 }}> */}
-          {/* Title bar */}
-          {/* <View
+        {/* Title bar */}
+        {/* <View
             style={{
               flexDirection: "row",
               alignItems: "center",
@@ -526,8 +431,6 @@ Upcoming Festive Offers
             );
           }}
         /> */}
-
-        
 
       </SafeAreaView>
 

@@ -13,6 +13,7 @@ import Profile from "../screens/Profile";
 import Login from "../screens/Login";
 import Products from "../screens/Products";
 import Categories from "../screens/Categories";
+import Cart from "../screens/Cart";
 
 export type TabsStackParamList = {
   Home: undefined;
@@ -51,7 +52,7 @@ const TabsNavigator = () => {
       />
       <TabsStack.Screen
         name="Cart"
-        component={Example}
+        component={Cart}
         options={{
           tabBarIcon(props) {
             return <Icons name="category" {...props} />;
@@ -69,8 +70,8 @@ const TabsNavigator = () => {
       />
       
       <TabsStack.Screen
-        name="Products"
-        component={Products}
+        name="Profile"
+        component={Profile}
         options={{
           tabBarIcon(props) {
             return <Icons name="person" {...props} />;

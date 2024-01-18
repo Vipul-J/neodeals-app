@@ -14,8 +14,7 @@ const ProductDetails: React.FC = () => {
   const navigation = useNavigation();
   const { id, customerId } = route.params;
 
-  const [product, setProduct] = useState<any>(null); // Update 'any' to your specific Product type
-
+  const [product, setProduct] = useState<any>(null);
   useEffect(() => {
     const fetchProduct = async () => {
       try {
@@ -33,6 +32,8 @@ const ProductDetails: React.FC = () => {
   const handleAddToCart = async () => {
     try {
       const apiUrl = 'http://neodeals.in:4002/api/cart/addProduct';
+      const customerId = "659c454126fcd9a49c82ab9e";
+
       const addToCartResponse = await fetch(apiUrl, {
         method: 'POST',
         headers: {
@@ -41,12 +42,16 @@ const ProductDetails: React.FC = () => {
         body: JSON.stringify({
           productId: id,
           customerId: customerId,
+          purchasePrice: product.price, // Assuming the product price is required
         }),
       });
 
-
-      navigation.navigate('Cart'); 
-      console.log(addToCartResponse)
+      if (addToCartResponse.ok) {
+        console.log("Added to cart");
+        navigation.navigate('Cart');
+       } else {
+        console.error('Error adding product to cart:', addToCartResponse.statusText);
+      }
     } catch (error) {
       console.error('Error adding product to cart:', error);
     }
